@@ -1,0 +1,25 @@
+<div class="card h-100 shadow-sm hover-card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+            <span class="badge bg-primary">{{ article.category.name }}</span>
+            <small class="text-muted">
+                <i class="far fa-calendar"></i> {{ article.createdAt|date('d/m/Y') }}
+            </small>
+        </div>
+
+        <h5 class="card-title">
+            <a href="{{ path('article_show', {id: article.id}) }}" class="text-decoration-none text-dark">
+                {{ article.title }}
+            </a>
+        </h5>
+
+        <p class="card-text text-muted">
+            {{ article.content|length > 150 ? article.content|slice(0, 150) ~ '...' : article.content }}
+        </p>
+    </div>
+    <div class="card-footer bg-transparent border-0 pb-3">
+        <a href="{{ path('article_show', {id: article.id}) }}" class="btn btn-sm btn-outline-primary">
+            <i class="fas fa-arrow-right"></i> Lire la suite
+        </a>
+    </div>
+</div>

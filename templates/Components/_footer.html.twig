@@ -1,0 +1,30 @@
+<footer class="bg-dark text-white mt-5 py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="fas fa-newspaper"></i> Symfony Press</h5>
+                <p class="text-muted">Votre source d'information de confiance</p>
+            </div>
+            <div class="col-md-3">
+                <h6>Navigation</h6>
+                <ul class="list-unstyled">
+                    <li><a href="{{ path('app_home') }}" class="text-muted">Accueil</a></li>
+                    <li><a href="{{ path('article_index') }}" class="text-muted">Articles</a></li>
+                    <li><a href="{{ path('app_category_index') }}" class="text-muted">Catégories</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>Suivez-nous</h6>
+                <div class="social-links">
+                    <a href="#" class="text-muted me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-muted me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-muted"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="border-secondary">
+        <div class="text-center text-muted">
+            <small>&copy; {{ 'now'|date('Y') }} Symfony Press. Tous droits réservés.</small>
+        </div>
+    </div>
+</footer>

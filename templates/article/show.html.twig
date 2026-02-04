@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }} - Symfony Press{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="article-detail">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('article_index') }}">Articles</a></li>
+                <li class="breadcrumb-item active">{{ article.title }}</li>
+            </ol>
+        </nav>
+
+        <!-- Catégorie et date -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-primary">
+                <i class="fas fa-tag"></i> {{ article.category.name }}
+            </span>
+            <small class="text-muted">
+                <i class="far fa-calendar"></i> {{ article.createdAt|date('d/m/Y à H:i') }}
+            </small>
+        </div>
+
+        <!-- Titre -->
+        <h1 class="mb-4">{{ article.title }}</h1>
+
+        <!-- Meta info -->
+        <div class="article-meta">
+            <p class="mb-1"><strong><i class="fas fa-link"></i> Slug:</strong> {{ article.slug }}</p>
+            <p class="mb-0"><strong><i class="fas fa-folder"></i> Catégorie:</strong>
+                <a href="{{ path('app_category_show', {id: article.category.id}) }}" class="text-decoration-none">
+                    {{ article.category.name }}
+                </a>
+            </p>
+        </div>
+
+        <!-- Contenu -->
+        <div class="article-content mt-4">
+            <h3><i class="fas fa-align-left"></i> Contenu</h3>
+            <p class="lead">{{ article.content }}</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-4 d-flex gap-2">
+            <a href="{{ path('article_index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
+            </a>
+            <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Modifier
+            </a>
+            {{ include('article/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

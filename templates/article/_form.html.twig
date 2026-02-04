@@ -1,0 +1,36 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+<div class="mb-3">
+	{{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+	{{ form_widget(form.title, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Un titre accrocheur...'}}) }}
+	{{ form_errors(form.title) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.slug, 'Slug (URL)', {'label_attr': {'class': 'form-label'}}) }}
+	{{ form_widget(form.slug, {'attr': {'class': 'form-control', 'placeholder': 'mon-super-article'}}) }}
+	{{ form_errors(form.slug) }}
+	<small class="form-text text-muted">
+		<i class="fas fa-info-circle"></i>
+		Utilisé dans l'URL de l'article
+	</small>
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
+	{{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 10, 'placeholder': 'Rédigez votre article ici...'}}) }}
+	{{ form_errors(form.content) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.category, 'Catégorie', {'label_attr': {'class': 'form-label'}}) }}
+	{{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
+	{{ form_errors(form.category) }}
+</div>
+
+{{ form_rest(form) }}
+
+<button class="btn btn-primary btn-lg w-100">
+	<i class="fas fa-save"></i>
+	{{ button_label|default('Enregistrer') }}
+</button>
+{{ form_end(form) }}

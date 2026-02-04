@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'article - Symfony Press
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row justify-content-center mt-4">
+			<div class="col-lg-8">
+				<div class="card shadow-sm border-0">
+					<div
+						class="card-body p-4">
+						<!-- En-tête -->
+						<div class="d-flex align-items-center mb-4">
+							<i class="fas fa-edit fa-3x text-warning me-3"></i>
+							<div>
+								<h1 class="h3 mb-0">Modifier l'article</h1>
+								<p class="text-muted mb-0">Mettez à jour votre contenu</p>
+							</div>
+						</div>
+
+						<!-- Formulaire -->
+						{{ include('article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+						<!-- Actions -->
+						<div class="mt-3 d-flex gap-2">
+							<a href="{{ path('article_index') }}" class="btn btn-outline-secondary">
+								<i class="fas fa-arrow-left"></i>
+								Retour à la liste
+							</a>
+							{{ include('article/_delete_form.html.twig') }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
