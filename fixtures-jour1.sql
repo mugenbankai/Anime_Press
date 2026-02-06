@@ -1,37 +1,36 @@
--- SymfonyPress - Dataset pédagogique JOUR 1
--- À importer après les migrations du Jour 1
--- Ce fichier NE contient PAS de user_id car l'entité User n'existe pas encore
+-- AnimePress - Dataset pédagogique
+-- Base de données transformée en blog sur les animés
 
--- Catégories
+-- Catégories d'animés
 INSERT INTO category (name, slug) VALUES
-('Symfony', 'symfony'),
-('PHP', 'php'),
-('DevOps', 'devops'),
-('Frontend', 'frontend'),
-('Architecture', 'architecture');
+('Shonen', 'shonen'),
+('Seinen', 'seinen'),
+('Isekai', 'isekai'),
+('Mecha', 'mecha'),
+('Slice of Life', 'slice-of-life');
 
--- Articles (avec author_id = 1)
+-- Articles sur les animés (avec author_id = 2)
 INSERT INTO article (title, slug, content, created_at, category_id, author_id) VALUES
-('Découvrir Symfony 8', 'decouvrir-symfony-8',
-'Symfony 8 apporte de nombreuses améliorations en performance et en DX. Le nouveau composant AssetMapper simplifie la gestion des assets frontend sans build step. Les attributs PHP 8 permettent une configuration plus claire et concise.', NOW(), 1, 1),
+('One Piece : L''odyssée de Luffy', 'one-piece-odyssee-luffy',
+'One Piece suit les aventures de Monkey D. Luffy, un jeune pirate au corps élastique qui rêve de devenir le Roi des Pirates. Avec son équipage du Chapeau de Paille, il parcourt Grand Line à la recherche du trésor légendaire One Piece. L''anime compte plus de 1000 épisodes et reste l''un des shonen les plus populaires au monde.', NOW(), 1, 2),
 
-('Twig pour les débutants', 'twig-pour-les-debutants',
-'Twig est le moteur de template par défaut de Symfony. Sa syntaxe claire et sécurisée permet de créer des vues maintenables. Les filtres, fonctions et extensions offrent une grande flexibilité pour manipuler les données côté template.', NOW(), 1, 1),
+('Attack on Titan : Une œuvre magistrale', 'attack-on-titan-oeuvre-magistrale',
+'L''Attaque des Titans (Shingeki no Kyojin) a révolutionné le genre seinen avec son intrigue complexe et ses rebondissements inattendus. L''histoire d''Eren Jaeger et de l''humanité face aux Titans offre une réflexion profonde sur la liberté, la guerre et la nature humaine. La fin controversée continue de diviser les fans.', NOW(), 2, 2),
 
-('Les bases solides de PHP moderne', 'php-moderne',
-'PHP 8 apporte le typage strict, les attributes, les enums et les propriétés promues. Ces fonctionnalités permettent un code plus robuste et expressif. L''écosystème PHP moderne inclut Composer, PHPStan et des outils de qualité professionnels.', NOW(), 2, 1),
+('Sword Art Online : Pionnier de l''isekai moderne', 'sword-art-online-pionnier-isekai',
+'SAO a popularisé le concept d''isekai dans les années 2010. Kirito et Asuna piégés dans un MMORPG virtuel où la mort dans le jeu signifie la mort réelle ont captivé des millions de fans. Malgré les critiques, l''anime reste une référence du genre et a inspiré de nombreuses œuvres similaires.', NOW(), 3, 2),
 
-('Doctrine et les relations', 'doctrine-relations',
-'Les jointures sont au cœur de toute application métier. Doctrine ORM permet de mapper les relations de base de données en objets PHP. ManyToOne, OneToMany, ManyToMany : chaque type de relation a ses spécificités et ses bonnes pratiques.', NOW(), 5, 1),
+('Neon Genesis Evangelion : Déconstruction du mecha', 'evangelion-deconstruction-mecha',
+'Evangelion a redéfini le genre mecha en 1995. Au-delà des combats de robots géants contre les Anges, l''anime explore la psyché de Shinji Ikari et pose des questions existentielles. Son influence sur la culture anime est immense, et ses thèmes restent d''actualité 30 ans après.', NOW(), 4, 2),
 
-('Organiser un projet Symfony', 'architecture-symfony',
-'Une bonne architecture permet un projet maintenable sur le long terme. Symfony impose une structure MVC claire : contrôleurs, entités, repositories, services. Les bundles permettent de modulariser les fonctionnalités.', NOW(), 5, 1),
+('Demon Slayer : Le phénomène Kimetsu', 'demon-slayer-phenomene-kimetsu',
+'Demon Slayer (Kimetsu no Yaiba) est devenu un phénomène mondial grâce à son animation spectaculaire par Ufotable. L''histoire de Tanjiro cherchant à sauver sa sœur Nezuko transformée en démon a conquis le public. Le film Mugen Train a battu tous les records au box-office japonais.', NOW(), 1, 2),
 
-('Symfony vs Laravel', 'symfony-vs-laravel',
-'Comparaison entre deux frameworks majeurs de l''écosystème PHP. Symfony privilégie la robustesse et la flexibilité, Laravel met l''accent sur la rapidité de développement. Les deux approches ont leurs avantages selon le contexte projet.', NOW(), 1, 1),
+('Steins;Gate : Le thriller temporel ultime', 'steins-gate-thriller-temporel',
+'Steins;Gate est considéré comme l''un des meilleurs animes de science-fiction. Okabe Rintaro et son laboratoire découvrent accidentellement le voyage dans le temps. L''anime mélange humour, tension et émotions avec une intrigue parfaitement construite. Un chef-d''œuvre du genre seinen.', NOW(), 2, 2),
 
-('Bases du frontend moderne', 'frontend-moderne',
-'HTML, CSS et JS sont les fondations du web. Les standards modernes incluent les Web Components, CSS Grid, et l''API Fetch. Stimulus et Turbo permettent d''ajouter de l''interactivité sans framework lourd.', NOW(), 4, 1),
+('Violet Evergarden : La beauté de l''émotion', 'violet-evergarden-beaute-emotion',
+'Kyoto Animation signe avec Violet Evergarden un anime d''une beauté visuelle époustouflante. L''histoire de Violet, ancienne soldate apprenant à comprendre les émotions humaines en devenant Doll (écrivaine publique), touche au cœur. Chaque épisode est une leçon de vie empreinte de poésie.', NOW(), 5, 2),
 
-('Déployer une app Symfony', 'deployer-symfony',
-'Docker, Nginx et CI/CD sont les piliers du déploiement moderne. Symfony s''adapte à tous les environnements : serveur dédié, VPS, cloud, PaaS. Les bonnes pratiques incluent les variables d''environnement et la gestion des secrets.', NOW(), 3, 1);
+('Gundam : L''héritage du Real Robot', 'gundam-heritage-real-robot',
+'Mobile Suit Gundam a lancé en 1979 le concept de Real Robot, opposé aux Super Robots. La franchise explore les conflits de guerre, la politique et l''humanité à travers des combats de mobile suits. Avec des dizaines de séries, Gundam reste le pilier du genre mecha et une icône culturelle japonaise.', NOW(), 4, 2);

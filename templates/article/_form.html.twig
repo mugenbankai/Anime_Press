@@ -3,15 +3,9 @@
 	{{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
 	{{ form_widget(form.title, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Un titre accrocheur...'}}) }}
 	{{ form_errors(form.title) }}
-</div>
-
-<div class="mb-3">
-	{{ form_label(form.slug, 'Slug (URL)', {'label_attr': {'class': 'form-label'}}) }}
-	{{ form_widget(form.slug, {'attr': {'class': 'form-control', 'placeholder': 'mon-super-article'}}) }}
-	{{ form_errors(form.slug) }}
 	<small class="form-text text-muted">
 		<i class="fas fa-info-circle"></i>
-		Utilisé dans l'URL de l'article
+		Le slug sera généré automatiquement depuis le titre
 	</small>
 </div>
 

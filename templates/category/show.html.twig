@@ -1,47 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ category.name }} - Symfony Press{% endblock %}
+{% block title %}
+	{{ category.name }}
+	- Symfony Press
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('app_category_index') }}">Catégories</a></li>
-            <li class="breadcrumb-item active">{{ category.name }}</li>
-        </ol>
-    </nav>
+	<div
+		class="container">
+		<!-- Alertes flash -->
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<i class="fas fa-check-circle"></i>
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			</div>
+		{% endfor %}
 
-    <!-- En-tête de catégorie -->
-    <div class="text-center mb-5 p-4 bg-white rounded shadow-sm">
-        <i class="fas fa-folder fa-4x text-primary mb-3"></i>
-        <h1>{{ category.name }}</h1>
-        <p class="text-muted">
-            <i class="fas fa-file-alt"></i> {{ category.articles|length }} article(s) dans cette catégorie
-        </p>
-    </div>
+		<!-- Breadcrumb -->
+		<nav aria-label="breadcrumb" class="mb-3">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="{{ path('app_home') }}">Accueil</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ path('app_category_index') }}">Catégories</a>
+				</li>
+				<li class="breadcrumb-item active">{{ category.name }}</li>
+			</ol>
+		</nav>
 
-    <!-- Articles de la catégorie -->
-    {% if category.articles is empty %}
-        <div class="alert alert-info text-center" role="alert">
-            <i class="fas fa-info-circle"></i> Aucun article dans cette catégorie pour le moment.
-        </div>
-    {% else %}
-        <div class="row g-4">
-            {% for article in category.articles %}
-                <div class="col-md-6 col-lg-4">
-                    {% include 'components/_article_card.html.twig' %}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+		<!-- En-tête de catégorie -->
+		<div class="text-center mb-5 p-4 bg-white rounded shadow-sm">
+			<i class="fas fa-folder fa-4x text-primary mb-3"></i>
+			<h1>{{ category.name }}</h1>
+			<p class="text-muted">
+				<i class="fas fa-file-alt"></i>
+				{{ category.articles|length }}
+				article(s) dans cette catégorie
+			</p>
+		</div>
 
-    <!-- Bouton retour -->
-    <div class="mt-4">
-        <a href="{{ path('app_category_index') }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Retour aux catégories
-        </a>
-    </div>
-</div>
-{% endblock %}
+		<!-- Articles de la catégorie -->
+		{% if category.articles is empty %}
+			<div class="alert alert-info text-center" role="alert">
+				<i class="fas fa-info-circle"></i>
+				Aucun article dans cette catégorie pour le moment.
+			</div>
+		{% else %}
+			<div class="row g-4">
+				{% for article in category.articles %}
+					<div class="col-md-6 col-lg-4">
+						{% include 'components/_article_card.html.twig' %}
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+
+		<!-- Bouton retour -->
+		<div class="mt-4 d-flex gap-2">
+			<a href="{{ path('app_category_index') }}" class="btn btn-secondary">
+				<i class="fas fa-arrow-left"></i>
+				Retour aux catégories
+			</a>
+			{% if app.user %}
+				<a href="{{ path('app_category_edit', {id: category.id}) }}" class="btn btn-warning">
+					<i class="fas fa-edit"></i>
+					Modifier
+				</a>
+			{% endif %}
+		</div>
+	{% endblock %}

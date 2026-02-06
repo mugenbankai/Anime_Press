@@ -23,7 +23,6 @@ final class ArticleController extends AbstractController
     }
 
     #[Route('/new', name: 'article_new', methods: ['GET', 'POST'])]
-    #[Route('/new', name: 'article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
@@ -31,6 +30,12 @@ final class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Générer le slug automatiquement s'il est vide
+            if (empty($article->getSlug())) {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $article->getTitle())));
+                $article->setSlug($slug);
+            }
+
             // Définir automatiquement la date de création
             $article->setCreatedAt(new \DateTimeImmutable());
 
@@ -60,10 +65,19 @@ final class ArticleController extends AbstractController
     #[Route('/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
+        // Vérifier que l'utilisateur connecté est bien l'auteur de l'article
+        if ($article->getAuthor() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez modifier que vos propres articles.');
+        }
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Régénérer le slug si le titre a changé
+            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $article->getTitle())));
+            $article->setSlug($slug);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
@@ -78,6 +92,11 @@ final class ArticleController extends AbstractController
     #[Route('/{id}', name: 'article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
+        // Vérifier que l'utilisateur connecté est bien l'auteur de l'article
+        if ($article->getAuthor() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez supprimer que vos propres articles.');
+        }
+
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($article);
             $entityManager->flush();
