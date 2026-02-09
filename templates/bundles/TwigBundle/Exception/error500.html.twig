@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur serveur - AnimePress
+{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8 text-center">
+				<div class="error-page">
+					<h1 class="display-1 fw-bold text-warning">500</h1>
+					<div class="mb-4">
+						<i class="fas fa-exclamation-triangle fa-5x text-warning"></i>
+					</div>
+					<h2 class="mb-3">Erreur serveur</h2>
+					<p class="lead text-muted mb-4">
+						Une erreur inattendue s'est produite sur le serveur.
+					</p>
+					<p class="mb-4">
+						Nos équipes ont été notifiées et travaillent à résoudre le problème.
+					</p>
+					<div class="d-flex gap-2 justify-content-center">
+						<a href="{{ path('app_home') }}" class="btn btn-primary">
+							<i class="fas fa-home"></i>
+							Retour à l'accueil
+						</a>
+						<button onclick="window.location.reload()" class="btn btn-outline-primary">
+							<i class="fas fa-redo"></i>
+							Réessayer
+						</button>
+					</div>
+
+					{% if show_details is defined and show_details and exception is defined %}
+						<div class="mt-5 text-start">
+							<div class="alert alert-danger">
+								<h5>
+									<i class="fas fa-info-circle"></i>
+									Détails de l'erreur (mode développement)</h5>
+								<hr>
+								<p>
+									<strong>Message :</strong>
+									{{ exception.message }}</p>
+								<p>
+									<strong>Fichier :</strong>
+									{{ exception.file }}
+									(ligne
+									{{ exception.line }})</p>
+								<p>
+									<strong>Type :</strong>
+									{{ exception.class|default('Exception') }}</p>
+							</div>
+						</div>
+					{% endif %}
+					font-size: 8rem;
+								text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+							}
+				</style>
+			{% endblock %}

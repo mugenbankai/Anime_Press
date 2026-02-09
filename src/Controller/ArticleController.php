@@ -65,8 +65,8 @@ final class ArticleController extends AbstractController
     #[Route('/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
-        // Vérifier que l'utilisateur connecté est bien l'auteur de l'article
-        if ($article->getAuthor() !== $this->getUser()) {
+        // Vérifier que l'utilisateur est l'auteur OU admin
+        if ($article->getAuthor() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Vous ne pouvez modifier que vos propres articles.');
         }
 
@@ -92,8 +92,8 @@ final class ArticleController extends AbstractController
     #[Route('/{id}', name: 'article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
-        // Vérifier que l'utilisateur connecté est bien l'auteur de l'article
-        if ($article->getAuthor() !== $this->getUser()) {
+        // Vérifier que l'utilisateur est l'auteur OU admin
+        if ($article->getAuthor() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Vous ne pouvez supprimer que vos propres articles.');
         }
 

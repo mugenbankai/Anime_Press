@@ -2,7 +2,7 @@
 
 {% block title %}
 	{{ article.title }}
-	- Symfony Press
+	- AnimePress
 {% endblock %}
 
 {% block body %}
@@ -69,7 +69,7 @@
 					Retour à la liste
 				</a>
 
-				{% if app.user and article.author == app.user %}
+				{% if app.user and (article.author == app.user or is_granted('ROLE_ADMIN')) %}
 					<a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-warning">
 						<i class="fas fa-edit"></i>
 						Modifier
